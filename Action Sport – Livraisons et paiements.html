@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Action Sport – Livraisons et paiements</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#f1f5fb;--card:#fff;--tx:#0f1b33;--mut:#5b6785;--bd:#e3e9f4;--navy:#0b2a6b;--navy2:#0a2159;--blue:#1560e8;--green:#12a150;--gbg:#e6f6ec;--red:#e03a3a;--rbg:#fde9e9;--amb:#f08a00;--abg:#fff3dc;--bbg:#e4eefc;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1220;--card:#141c2f;--tx:#e8edf8;--mut:#93a0bd;--bd:#26314a;--gbg:#12301f;--rbg:#3a1a1d;--abg:#35290f;--bbg:#15294d}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.app{display:grid;grid-template-columns:220px 1fr;min-height:100%}
+.app.open{grid-template-columns:220px 1fr 380px}
+aside{background:linear-gradient(180deg,var(--navy),var(--navy2));color:#cfdaf5;padding:22px 14px;position:sticky;top:0;height:100vh}
+.logo{font-style:italic;font-weight:800;font-size:23px;line-height:.95;color:#fff;letter-spacing:-.5px;padding:0 8px 26px}
+.logo span{display:block}
+nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px;color:#cfdaf5;text-decoration:none;font-weight:500;margin-bottom:4px}
+nav a.on{background:var(--blue);color:#fff}
+nav a:hover:not(.on){background:rgba(255,255,255,.08)}
+nav i{font-style:normal;width:18px;text-align:center}
+.badge{margin-left:auto;background:var(--red);color:#fff;border-radius:99px;font-size:11px;font-weight:700;padding:2px 7px}
+main{padding:18px 24px;min-width:0}
+header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+header h1{font-size:21px;margin:0;font-weight:800}
+header p{margin:2px 0 0;color:var(--mut)}
+.sp{flex:1}
+.user{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:99px;padding:6px 12px;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.kpi{border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center}
+.kpi .ic{width:42px;height:42px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:19px;flex:none}
+.kpi small{display:block;color:var(--mut);font-weight:500}
+.kpi b{font-size:19px;display:block;margin:2px 0;white-space:nowrap}
+.k1{background:var(--bbg)}.k2{background:var(--gbg)}.k3{background:var(--rbg)}.k4{background:var(--abg)}.k5{background:var(--bbg)}
+.up{color:var(--green);font-weight:700;font-size:12px}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:12px}
+.tabs{display:flex;gap:22px;align-items:center;padding:0 4px;margin-bottom:12px;flex-wrap:wrap}
+.tab{background:none;border:0;padding:12px 0;color:var(--tx);font-weight:600;border-bottom:3px solid transparent;display:flex;gap:8px;align-items:center}
+.tab.on{color:var(--blue);border-color:var(--blue)}
+.cnt{background:var(--bd);border-radius:99px;padding:2px 9px;font-size:12px}
+.tab.on .cnt{background:var(--bbg)}
+.btn{background:var(--green);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:600}
+.btn.blue{background:var(--blue)}
+.filters{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:10px;margin-bottom:14px;align-items:end}
+.f{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 12px}
+.f label{display:block;font-size:12px;font-weight:600;margin-bottom:3px}
+.f select,.f input{width:100%;border:0;background:transparent;color:var(--tx);font:inherit;font-size:13px;padding:0}
+.f select option{color:#000}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:860px}
+th{font-size:11.5px;color:var(--mut);text-align:left;padding:12px 8px;font-weight:600;border-bottom:1px solid var(--bd);white-space:nowrap}
+td{padding:11px 8px;border-bottom:1px solid var(--bd);font-weight:500;white-space:nowrap}
+tbody tr{cursor:pointer}
+tbody tr:hover,tbody tr.sel{background:var(--bbg)}
+a.trk{color:var(--blue);font-weight:600;text-decoration:none}
+.carr{font-weight:800;font-size:15px;letter-spacing:-.5px}
+.aramex{color:#e8312f}
+.dhl{background:#ffcc00;color:#d40511;font-style:italic;padding:0 5px;border-radius:2px;font-weight:900}
+.st{display:inline-flex;gap:6px;align-items:center;border-radius:99px;padding:4px 12px;font-size:12.5px;font-weight:600}
+.st.p{background:var(--gbg);color:var(--green)}
+.st.w{background:var(--bbg);color:var(--blue)}
+.st.l{background:var(--rbg);color:var(--red)}
+.act{color:var(--mut);letter-spacing:2px}
+.foot{display:flex;justify-content:space-between;align-items:center;padding:14px;flex-wrap:wrap;gap:8px}
+.pg{display:flex;gap:6px}
+.pg button{min-width:32px;height:32px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:7px}
+.pg .on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.detail{background:var(--card);border-left:1px solid var(--bd);padding:18px 16px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.detail[hidden]{display:none}
+.dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.dh h2{margin:0;font-size:21px;font-weight:800}
+.x{background:none;border:0;font-size:22px;color:var(--tx)}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:700;gap:8px}
+.chip{background:var(--bbg);color:var(--blue);border-radius:8px;padding:8px 12px;font-weight:600;font-size:13px}
+.cl{border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
+.cl h3{margin:0;font-size:18px}
+.cl .sub{color:var(--mut);margin:2px 0 12px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
+.row{display:flex;gap:10px;padding:5px 0}
+.row span{color:var(--mut);width:110px}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.mini div{border-radius:10px;padding:12px;font-size:12px}
+.mini b{display:block;font-size:18px;margin-top:3px}
+.pt{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pt h3{margin:0;font-size:18px}
+.pay td,.pay th{font-size:12.5px;padding:9px 6px}
+.empty{padding:30px;text-align:center;color:var(--mut)}
+dialog{border:1px solid var(--bd);border-radius:16px;background:var(--card);color:var(--tx);padding:20px 22px;width:min(640px,94vw);max-height:94vh;overflow-y:auto}
+dialog::backdrop{background:rgba(5,12,30,.55)}
+.dhd{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--bd);margin-bottom:14px}
+.dhd h3{margin:0;font-size:20px;font-weight:800;flex:1}
+.dic{width:36px;height:36px;border-radius:10px;background:var(--gbg);display:grid;place-items:center}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.fd.full{grid-column:1/-1}
+.fd label{display:block;font-weight:600;font-size:13px;margin-bottom:5px}
+.fd label b{color:var(--red)}
+.fd input,.fd select,.fd textarea,.ro{width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:9px;background:var(--card);color:var(--tx);font:inherit;display:block}
+.fd textarea{resize:vertical}
+.ro{background:var(--bg);font-weight:700}
+.fd .hl{border-color:var(--green);box-shadow:0 0 0 2px var(--gbg);font-weight:700}
+.after{display:flex;justify-content:space-between;align-items:center;background:var(--gbg);border-radius:10px;padding:12px 14px;margin:16px 0 8px;font-weight:600}
+.after b{color:var(--green);font-size:19px}
+.err{color:var(--red);font-weight:600;font-size:13px;min-height:18px}
+.dft{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:6px}
+.sw{display:flex;align-items:center;gap:10px;font-weight:600;font-size:13px;cursor:pointer}
+.sw input{position:absolute;opacity:0}
+.sw i{width:40px;height:22px;border-radius:99px;background:var(--bd);position:relative;transition:.2s;flex:none}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+i{background:var(--green)}
+.sw input:checked+i::after{left:21px}
+.sw input:focus-visible+i{outline:2px solid var(--blue);outline-offset:2px}
+.chipst{background:var(--abg);border-radius:99px;padding:6px 12px;font-size:12.5px;font-weight:600}
+.dbtn{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.sr{position:relative}
+#dsg{position:absolute;left:0;right:0;top:100%;margin:4px 0 0;padding:4px;list-style:none;background:var(--card);border:1px solid var(--bd);border-radius:10px;box-shadow:0 12px 28px rgba(0,0,0,.2);z-index:5;max-height:240px;overflow-y:auto}
+#dsg li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:7px;cursor:pointer}
+#dsg li.on,#dsg li:hover{background:var(--bbg)}
+#dsg .tg{background:var(--bd);border-radius:6px;padding:2px 8px;font-size:11.5px;font-weight:700;min-width:64px;text-align:center}
+#dsg small{color:var(--mut);margin-left:auto}
+#dsg .none{color:var(--mut);cursor:default}
+#chq{border:1px dashed var(--bd);border-radius:10px;padding:12px;background:var(--bg)}
+#dprev{max-width:100%;max-height:170px;margin-top:8px;border-radius:8px;border:1px solid var(--bd)}
+#dprev[hidden]{display:none}
+.eye{background:none;border:0;font-size:16px;padding:2px 6px;border-radius:6px;color:var(--tx)}
+.eye:hover{background:var(--bbg)}
+@media(max-width:560px){.dg{grid-template-columns:1fr}}
+.btn.gh{background:var(--bd);color:var(--tx)}
+@media(max-width:1180px){.app.open{grid-template-columns:200px 1fr}.detail{position:fixed;right:0;top:0;width:min(380px,100%);z-index:5;box-shadow:-10px 0 30px rgba(0,0,0,.2)}}
+@media(max-width:860px){.app,.app.open{grid-template-columns:1fr}aside{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}main{padding:14px}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+<aside>
+<div class="logo"><span>ACTION</span><span>SPORT®</span></div>
+<nav>
+<a href="#tableau" class="on"><i>⌂</i>Tableau de bord</a>
+<a href="#livraisons"><i>🚚</i>Livraisons &amp; Paiements</a>
+<a href="#clients"><i>👥</i>Clients</a>
+<a href="#factures"><i>📄</i>Factures</a>
+<a href="#encaissements"><i>💳</i>Encaissements</a>
+<a href="#echeances"><i>📅</i>Échéances</a>
+<a href="#relances"><i>🔔</i>Relances<span class="badge">3</span></a>
+<a href="#rapports"><i>📊</i>Rapports &amp; Analyses</a>
+<a href="#parametres"><i>⚙</i>Paramètres</a>
+</nav>
+</aside>
+<main>
+<header>
+<div><h1>Gestion des livraisons et des paiements</h1><p>Suivi des bons de livraison, des paiements clients et de la situation financière</p></div>
+<span class="sp"></span>
+<span class="user">👤 Action Sport ⌄</span>
+</header>
+<section class="kpis">
+<div class="kpi k1"><div class="ic">🚚</div><div><small>Total livraisons</small><b id="kA">1 248</b><small id="kA2">Cette période</small></div></div>
+<div class="kpi k2"><div class="ic">✓</div><div><small>Montant encaissé</small><b id="kB">2 845 320 DH</b><span class="up" id="kB2">+ 18,4 %</span></div></div>
+<div class="kpi k3"><div class="ic">💳</div><div><small>Montant en attente</small><b id="kC">412 560 DH</b><small id="kC2">(28 livraisons)</small></div></div>
+<div class="kpi k4"><div class="ic">⏱</div><div><small>En retard</small><b id="kD">136 890 DH</b><small id="kD2">(9 livraisons)</small></div></div>
+<div class="kpi k5"><div class="ic">Σ</div><div><small>Montant total</small><b id="kE">3 257 880 DH</b></div></div>
+</section>
+<div class="tabs" id="tabs">
+<button class="tab on" data-f="all">Toutes les livraisons <span class="cnt" id="nAll">1 248</span></button>
+<button class="tab" data-f="w">À encaisser <span class="cnt" id="nW">28</span></button>
+<button class="tab" data-f="l">En retard <span class="cnt" id="nL">9</span></button>
+<button class="tab" data-f="p">Payées <span class="cnt" id="nP">1 211</span></button>
+<span class="sp"></span>
+<button class="btn" id="addTop">＋ Ajouter paiement</button>
+</div>
+<div class="filters">
+<div class="f"><label>Période</label><select><option>Du 01/07/2026 au 31/10/2026</option><option>Ce mois</option><option>Ce trimestre</option></select></div>
+<div class="f"><label>Société de transport</label><select id="fc"><option value="">Toutes</option><option>Aramex</option><option>DHL</option></select></div>
+<div class="f"><label>Client</label><select id="fcl"><option value="">Tous les clients</option></select></div>
+<div class="f"><label>Statut de paiement</label><select id="fs"><option value="">Tous les statuts</option><option value="p">Payé</option><option value="w">En attente</option><option value="l">En retard</option></select></div>
+<button class="btn blue" id="go">🔍 Rechercher</button>
+</div>
+<div class="panel">
+<div class="tw"><table>
+<thead><tr><th><input type="checkbox" aria-label="Tout sélectionner"></th><th>Numéro de suivi</th><th>N° bon de livraison</th><th>Société de transport</th><th>Date de livraison</th><th>Nom de société cliente</th><th>Montant total</th><th>Montant payé</th><th>Reste à payer (DH)</th><th>Statut de paiement</th><th>Actions</th></tr></thead>
+<tbody id="tb"></tbody>
+</table></div>
+<div class="foot"><span id="info"></span>
+<div class="pg"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>…</button><button>125</button><button>›</button></div></div>
+</div>
+</main>
+<section class="detail" id="detail" hidden aria-label="Détail de la commande"></section>
+</div>
+
+<dialog id="dlg" aria-labelledby="dt">
+<div class="dhd"><span class="dic">💳</span><h3 id="dt">Enregistrer un paiement</h3><button class="x" id="dx" aria-label="Fermer">×</button></div>
+<div class="dg">
+<div class="fd full sr"><label for="dq">Rechercher par client, N° BL ou N° tracking</label><input id="dq" type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="dsg" placeholder="Tapez un nom de client, BL-2026-… ou un numéro de suivi"><ul id="dsg" role="listbox" hidden></ul></div>
+<div class="fd"><label>Client <b>*</b></label><output id="dcl" class="ro">—</output></div>
+<div class="fd"><label for="dbl">N° BL concerné <b>*</b></label><select id="dbl" disabled></select></div>
+<div class="fd"><label>N° tracking</label><output id="dtrk" class="ro">—</output></div>
+<div class="fd"><label>Montant total</label><output id="dtot" class="ro"></output></div>
+<div class="fd"><label>Montant déjà payé</label><output id="dpaid" class="ro"></output></div>
+<div class="fd"><label for="dm">Montant reçu (DH) <b>*</b></label><input id="dm" type="number" min="0" step="0.01" class="hl"></div>
+<div class="fd"><label for="dmode">Mode de règlement <b>*</b></label><select id="dmode"><option>Espèces à la livraison</option><option selected>Virement bancaire</option><option>Chèque</option><option>Carte bancaire</option></select></div>
+<div class="fd"><label for="dd">Date de paiement <b>*</b></label><input id="dd" type="date"></div>
+<div class="fd full"><label for="dref">Référence paiement <b>*</b></label><input id="dref"></div>
+<div class="fd full" id="chq" hidden><div class="dg">
+<div class="fd"><label for="dcr">Date de récupération du chèque <b>*</b></label><input id="dcr" type="date"></div>
+<div class="fd"><label for="ddp">Date de dépôt (indiquée sur le chèque) <b>*</b></label><input id="ddp" type="date"></div>
+<div class="fd full"><label for="dimg">Image du chèque <b>*</b></label><input id="dimg" type="file" accept="image/*"><img id="dprev" alt="Aperçu du chèque" hidden></div>
+</div></div>
+<div class="fd full"><label for="dcom">Commentaire</label><textarea id="dcom" rows="2" placeholder="Ex. : acompte reçu du client"></textarea></div>
+</div>
+<div class="after"><span>⚖ Solde restant après paiement :</span><b id="dafter"></b></div>
+<div id="derr" class="err" role="alert"></div>
+<div class="dft"><label class="sw"><input type="checkbox" id="dauto" checked><i></i><span>Mettre à jour le statut automatiquement</span></label><span class="chipst" id="dchip"></span></div>
+<div class="dbtn"><button class="btn gh" id="dc">Annuler</button><button class="btn" id="ds">✓ Valider le paiement</button></div>
+</dialog>
+
+<dialog id="pdlg" aria-labelledby="pdt"><div class="dhd"><span class="dic">👁</span><h3 id="pdt">Détail du paiement</h3><button class="x" id="pdx" aria-label="Fermer">×</button></div><div id="pdb"></div><div class="dbtn"><button class="btn gh" id="pdc">Fermer</button></div></dialog>
+
+<script>
+const fmt=n=>n.toLocaleString('fr-FR').replace(/\u202f/g,' ')+' DH';
+const D=[
+['51416337685','BL-2026-07845','Aramex','15/08/2026','Marjane Retail',48750,48750,[]],
+['51416337560','BL-2026-07844','Aramex','14/08/2026','Carrefour Maroc',62300,0,[]],
+['51416337033','BL-2026-0847','Aramex','15/08/2026','Yassine El Amrani',890,700,[['05/10/2026',400,'Espèces à la livraison','PAY-78451'],['10/10/2026',300,'Virement bancaire','VIR-22871']],'late','Casablanca'],
+['51416334480','BL-2026-07790','Aramex','13/07/2026','Kitea',91240,91240,[]],
+['51416333452','BL-2026-07765','Aramex','02/07/2026','Zone Retail',36500,36500,[]],
+['50936096993','BL-2026-07720','DHL','29/06/2026','Marjane Holding',118900,0,[]],
+['51416334303','BL-2026-07698','Aramex','13/07/2026','Atacadão',54300,54300,[]],
+['51416337501','BL-2026-07670','DHL','10/07/2026','Label’Vie',72600,0,[]],
+['51416337652','BL-2026-07655','Aramex','09/07/2026','Electroplanet',39990,39990,[]],
+['51416337641','BL-2026-07654','Aramex','09/07/2026','Acima',29700,0,[],'late'],
+['51416337650','BL-2026-08451','Aramex','10/09/2026','Carrefour Maroc',125430,70000,[]],
+['50936069993','BL-2026-08371','DHL','02/09/2026','Carrefour Maroc',38900,0,[]]
+].map(r=>({trk:r[0],bl:r[1],car:r[2],date:r[3],cl:r[4],tot:r[5],paid:r[6],pays:r[7].length?r[7]:(r[6]?[[r[3],r[6],'Virement bancaire','VIR-'+r[0].slice(-5)]]:[]),late:r[8]==='late',city:r[9]||'Casablanca'}));
+const web=D[2];
+const st=o=>o.fz||(o.tot-o.paid<=0?'p':(o.late?'l':'w'));
+const lbl={p:['✓','Payé'],w:['◷','En attente'],l:['⚠','En retard']};
+let tab='all',sel=null;
+const $=s=>document.querySelector(s);
+const car=c=>c==='DHL'?'<span class="carr dhl">DHL</span>':'<span class="carr aramex">aramex</span>';
+const cs=[...new Set(D.map(o=>o.cl))].sort();
+cs.forEach(c=>$('#fcl').insertAdjacentHTML('beforeend',`<option>${c}</option>`));
+function render(){
+ const c=$('#fc').value,cl=$('#fcl').value,s=$('#fs').value,f=tab==='all'?s:tab;
+ const base=D.filter(o=>(!c||o.car===c)&&(!cl||o.cl===cl));
+ const rows=base.filter(o=>!f||st(o)===f);
+ const sum=(a,k)=>a.reduce((t,o)=>t+(k==='r'?o.tot-o.paid:o[k]),0);
+ const W=rows.filter(o=>st(o)==='w'),L=rows.filter(o=>st(o)==='l'),n=a=>`(${a.length} livraison${a.length>1?'s':''})`;
+ $('#kA').textContent=rows.length.toLocaleString('fr-FR');$('#kA2').textContent=(c||cl||f)?'Selon la recherche':'Cette période';
+ $('#kB').textContent=fmt(sum(rows,'paid'));$('#kB2').hidden=!!(c||cl||f);
+ $('#kC').textContent=fmt(sum(W,'r'));$('#kC2').textContent=n(W);
+ $('#kD').textContent=fmt(sum(L,'r'));$('#kD2').textContent=n(L);
+ $('#kE').textContent=fmt(sum(rows,'tot'));
+ const cn=k=>base.filter(o=>st(o)===k).length;
+ $('#nAll').textContent=base.length;$('#nW').textContent=cn('w');$('#nL').textContent=cn('l');$('#nP').textContent=cn('p');
+ $('#tb').innerHTML=rows.length?rows.map(o=>{const k=st(o);return `<tr data-t="${o.trk}" class="${sel===o?'sel':''}"><td><input type="checkbox" aria-label="Sélectionner"></td><td><a class="trk" href="#${o.trk}">${o.trk} ↗</a></td><td>${o.bl}</td><td>${car(o.car)}</td><td>${o.date}</td><td>${o.cl}</td><td>${fmt(o.tot)}</td><td>${fmt(o.paid)}</td><td>${fmt(o.tot-o.paid)}</td><td><span class="st ${k}">${lbl[k][0]} ${k==='w'&&o.paid>0?'Partiellement payé':lbl[k][1]}</span></td><td class="act">👁 ⋯</td></tr>`}).join(''):'<tr><td colspan="11" class="empty">Aucune livraison ne correspond à ces filtres. Modifiez la recherche pour élargir les résultats.</td></tr>';
+ $('#info').textContent=`Affichage de ${rows.length?1:0} à ${rows.length} sur ${rows.length} livraisons`;
+}
+function detail(o){
+ sel=o;const k=st(o),rest=o.tot-o.paid;
+ $('#app').classList.add('open');const d=$('#detail');d.hidden=false;
+ d.innerHTML=`<div class="dh"><h2>Détail de la commande</h2><button class="x" aria-label="Fermer" id="cx">×</button></div>
+ <div class="meta"><span class="chip">🛍 Commande e-commerce (Web)</span><span>N° BL : ${o.bl}</span></div>
+ <div class="cl"><h3>${o.cl}</h3><div class="sub">🛒 Client web (E-commerce)</div>
+ <div class="row"><span>📍 Ville :</span>${o.city}</div>
+ <div class="row"><span>📦 N° tracking :</span><a class="trk" href="#${o.trk}">${o.trk} ↗</a></div>
+ <div class="row"><span>🚚 Transporteur :</span>${car(o.car)}</div></div>
+ <div class="mini"><div class="k1">Montant total<b>${fmt(o.tot)}</b></div><div class="k2">Montant payé<b>${fmt(o.paid)}</b></div><div class="k3">Reste à payer<b>${fmt(rest)}</b></div></div>
+ <div class="pt"><h3>Liste des paiements (${o.pays.length})</h3><button class="btn blue" id="addD">Ajouter paiement</button></div>
+ ${o.pays.length?`<table class="pay panel"><thead><tr><th>Date</th><th>Montant</th><th>Mode de paiement</th><th>Référence</th><th></th></tr></thead><tbody>${o.pays.map((p,i)=>`<tr><td>${p[0]}</td><td><b>${fmt(p[1])}</b></td><td>${p[2]}</td><td>${p[3]}</td><td><button class="eye" data-i="${i}" aria-label="Voir le détail du paiement">👁</button><button class="eye" data-e="${i}" aria-label="Modifier le paiement">✏️</button></td></tr>${p[4]?`<tr><td colspan="5" style="color:var(--mut)">Récupéré le ${p[4].cr} · Dépôt le ${p[4].dp}<img src="${p[4].img}" alt="Image du chèque" style="height:56px;border-radius:6px;display:block;margin-top:6px"></td></tr>`:''}`).join('')}</tbody></table>`:'<div class="empty panel">Aucun paiement enregistré. Ajoutez le premier paiement pour cette commande.</div>'}`;
+ $('#cx').onclick=close;$('#addD').onclick=()=>openDlg(o);render();
+}
+function close(){sel=null;$('#app').classList.remove('open');$('#detail').hidden=true;render()}
+const dlg=$('#dlg');
+const pre={'Espèces à la livraison':'PAY','Virement bancaire':'VIR','Chèque':'CHQ','Carte bancaire':'CB'};
+const gen=()=>pre[$('#dmode').value]+'-'+Math.floor(100000+Math.random()*899999);
+const cur=()=>D.find(o=>o.bl===$('#dbl').value);
+function toast(t){const n=document.createElement('div');n.className='toast';n.setAttribute('role','status');n.textContent=t;document.body.appendChild(n);setTimeout(()=>n.remove(),2600)}
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+let ed=null;const pb=o=>o.paid-(ed?ed.p[1]:0);
+function setCl(c,pick){
+ $('#dcl').textContent=c||'—';
+ const l=D.filter(o=>o.cl===c&&o.tot>o.paid),b=$('#dbl');
+ if(!c){b.innerHTML='<option value="">Recherchez d’abord une livraison</option>';b.disabled=true}
+ else if(!l.length){b.innerHTML='<option value="">Aucune livraison à régler</option>';b.disabled=true}
+ else{b.disabled=false;b.innerHTML=(pick?'':'<option value="">Choisir un BL…</option>')+l.map(o=>`<option>${o.bl}</option>`).join('');if(pick)b.value=pick.bl}
+ fillAmt();
+}
+function fillAmt(){
+ const o=cur(),m=$('#dm');
+ $('#dtrk').textContent=o?o.trk:'—';
+ $('#dtot').textContent=o?fmt(o.tot):'—';$('#dpaid').textContent=o?fmt(pb(o)):'—';
+ m.value=o?o.tot-pb(o):'';m.max=o?o.tot-pb(o):0;m.disabled=!o;
+ $('#dref').value=o?gen():'';upd();
+}
+function upd(){
+ const o=cur(),v=+$('#dm').value||0;
+ if(!o){$('#dafter').textContent='—';$('#dchip').textContent='Sélectionnez une livraison';return}
+ const r=Math.max(0,o.tot-pb(o)-v);
+ $('#dafter').textContent=fmt(r);
+ const nx=r===0?'Payé':(v>0||pb(o)>0)?'Partiellement payé':lbl[st(o)][1];
+ $('#dchip').innerHTML=$('#dauto').checked?`Le statut passera à : <b>${nx}</b>`:'Le statut ne sera pas modifié';
+}
+let sg=[],ai=0;
+function sugg(){
+ const q=norm($('#dq').value.trim()),u=$('#dsg'),out=[];
+ if(!q){u.hidden=true;sg=[];return}
+ [...new Set(D.map(o=>o.cl))].filter(c=>norm(c).includes(q)).forEach(c=>out.push({k:'Client',v:c,s:D.filter(o=>o.cl===c&&o.tot>o.paid).length+' BL à régler'}));
+ D.filter(o=>norm(o.bl).includes(q)).forEach(o=>out.push({k:'BL',v:o.bl,s:o.cl}));
+ D.filter(o=>o.trk.includes(q)).forEach(o=>out.push({k:'Tracking',v:o.trk,s:o.cl+' · '+o.bl}));
+ sg=out.slice(0,8);ai=0;
+ u.innerHTML=sg.length?sg.map((x,i)=>`<li role="option" data-i="${i}" class="${i?'':'on'}"><span class="tg">${x.k}</span><b>${x.v}</b><small>${x.s}</small></li>`).join(''):'<li class="none">Aucun résultat pour cette recherche</li>';
+ u.hidden=false;$('#dq').setAttribute('aria-expanded','true');
+}
+function pickS(i){
+ const x=sg[i];if(!x)return;
+ if(x.k==='Client')setCl(x.v);
+ else{
+  const o=D.find(r=>(x.k==='BL'?r.bl:r.trk)===x.v);
+  if(o.tot<=o.paid){toast('Cette livraison est déjà entièrement payée.');return}
+  setCl(o.cl,o);
+ }
+ $('#dq').value=x.v;$('#dsg').hidden=true;
+ if(x.k==='Client')$('#dbl').focus();
+}
+function openDlg(o){
+ ed=null;
+ if(o&&o.tot<=o.paid){toast('Cette livraison est déjà entièrement payée.');return}
+ $('#dq').value=o?o.bl:'';$('#dsg').hidden=true;
+ $('#dd').value=new Date().toISOString().slice(0,10);$('#dcom').value='';
+ $('#dmode').value='Virement bancaire';chqT();$('#dcr').value=$('#ddp').value=$('#dimg').value='';$('#dprev').hidden=true;$('#derr').textContent='';$('#dauto').checked=true;
+ setCl(o?o.cl:'',o||undefined);dlg.showModal();
+}
+$('#dq').oninput=()=>{if(!$('#dq').value.trim())setCl('');sugg()};
+$('#dq').onblur=()=>{$('#dsg').hidden=true};
+$('#dq').onkeydown=e=>{
+ const n=sg.length;
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if(!n)return;ai=(ai+(e.key==='ArrowDown'?1:n-1))%n;document.querySelectorAll('#dsg li').forEach((l,i)=>l.classList.toggle('on',i===ai))}
+ else if(e.key==='Enter'){e.preventDefault();pickS(ai)}
+ else if(e.key==='Escape'&&!$('#dsg').hidden){e.preventDefault();$('#dsg').hidden=true}
+};
+$('#dsg').onmousedown=e=>{const l=e.target.closest('li[data-i]');if(l){e.preventDefault();pickS(+l.dataset.i)}};
+$('#dbl').onchange=fillAmt;
+$('#dm').oninput=upd;$('#dauto').onchange=upd;
+const fd=s=>s.split('-').reverse().join('/');
+function chqT(){$('#chq').hidden=$('#dmode').value!=='Chèque'}
+$('#dimg').onchange=()=>{const f=$('#dimg').files[0],p=$('#dprev');if(!f){p.hidden=true;return}const r=new FileReader();r.onload=()=>{p.src=r.result;p.hidden=false};r.readAsDataURL(f)};
+$('#dmode').onchange=()=>{if(cur()&&!ed)$('#dref').value=gen();chqT()};
+$('#dc').onclick=$('#dx').onclick=()=>dlg.close();
+dlg.onclose=()=>{ed=null;$('#dq').disabled=false;$('#dt').textContent='Enregistrer un paiement';$('#ds').textContent='✓ Valider le paiement'};
+function openEdit(o,i){
+ const p=o.pays[i],c=p[4],rv=s=>s.split('/').reverse().join('-');
+ ed={o,i,p};
+ $('#dt').textContent='Modifier le paiement';$('#ds').textContent='✓ Enregistrer les modifications';
+ $('#dq').value=o.bl;$('#dq').disabled=true;$('#dsg').hidden=true;
+ $('#dcl').textContent=o.cl;$('#dbl').innerHTML=`<option>${o.bl}</option>`;$('#dbl').disabled=true;
+ $('#dtrk').textContent=o.trk;$('#dtot').textContent=fmt(o.tot);$('#dpaid').textContent=fmt(pb(o));
+ $('#dm').disabled=false;$('#dm').value=p[1];$('#dm').max=o.tot-pb(o);
+ $('#dmode').value=p[2];chqT();
+ $('#dd').value=rv(p[0]);$('#dref').value=p[3];$('#dcom').value=p[5]||'';
+ $('#dcr').value=c?rv(c.cr):'';$('#ddp').value=c?rv(c.dp):'';
+ const pv=$('#dprev');if(c){pv.src=c.img;pv.hidden=false}else pv.hidden=true;
+ $('#dimg').value='';$('#derr').textContent='';$('#dauto').checked=!o.fz;
+ upd();dlg.showModal();
+}
+function showPay(o,i){
+ const p=o.pays[i],c=p[4],R=(a,b)=>`<div class="row"><span>${a}</span><b>${b}</b></div>`;
+ $('#pdb').innerHTML=`<div class="cl" style="margin:0 0 4px">${R('Date',p[0])}${R('Montant',fmt(p[1]))}${R('Mode de règlement',p[2])}${R('Référence',p[3])}${R('Client',o.cl)}${R('N° BL',o.bl)}${R('N° tracking',o.trk)}${p[5]?R('Commentaire',p[5]):''}${c?R('Récupération du chèque',c.cr)+R('Date de dépôt',c.dp)+`<img src="${c.img}" alt="Image du chèque" style="max-width:100%;max-height:260px;margin-top:8px;border-radius:8px;border:1px solid var(--bd)">`:''}</div>`;
+ $('#pdlg').showModal();
+}
+$('#pdc').onclick=$('#pdx').onclick=()=>$('#pdlg').close();
+$('#detail').onclick=e=>{const b=e.target.closest('.eye');if(!b||!sel)return;if(b.dataset.e!==undefined)openEdit(sel,+b.dataset.e);else showPay(sel,+b.dataset.i)};
+$('#ds').onclick=()=>{
+ const o=cur(),v=+$('#dm').value,e=$('#derr');
+ if(!o)return e.textContent='Recherchez puis sélectionnez une livraison à régler.';
+ if(!(v>0))return e.textContent='Saisissez un montant reçu supérieur à 0.';
+ if(v>o.tot-pb(o))return e.textContent=`Le montant dépasse le reste à payer (${fmt(o.tot-pb(o))}).`;
+ if(!$('#dd').value)return e.textContent='Choisissez la date de paiement.';
+ if(!$('#dref').value.trim())return e.textContent='Indiquez la référence du paiement.';
+ const chq=$('#dmode').value==='Chèque';
+ if(chq&&!$('#dcr').value)return e.textContent='Indiquez la date de récupération du chèque.';
+ if(chq&&!$('#ddp').value)return e.textContent='Indiquez la date de dépôt inscrite sur le chèque.';
+ if(chq&&$('#dprev').hidden)return e.textContent='Joignez l’image du chèque.';
+ const [y,m,d]=$('#dd').value.split('-'),before=st(o);
+ const row=[`${d}/${m}/${y}`,v,$('#dmode').value,$('#dref').value.trim(),chq?{cr:fd($('#dcr').value),dp:fd($('#ddp').value),img:$('#dprev').src}:null,$('#dcom').value.trim()];
+ if(ed){o.paid=pb(o)+v;o.pays[ed.i]=row}else{o.paid+=v;o.pays.push(row)}
+ if($('#dauto').checked)delete o.fz;else o.fz=before;
+ dlg.close();detail(o);toast(ed?'Paiement modifié':'Paiement enregistré');
+};
+$('#addTop').onclick=()=>openDlg();
+$('#go').onclick=render;
+['fc','fcl','fs'].forEach(i=>$('#'+i).onchange=render);
+$('#tabs').onclick=e=>{const b=e.target.closest('.tab');if(!b)return;tab=b.dataset.f;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));render()};
+$('#tb').onclick=e=>{if(e.target.closest('input'))return;const a=e.target.closest('a');if(a)e.preventDefault();const r=e.target.closest('tr[data-t]');if(r)detail(D.find(o=>o.trk===r.dataset.t))};
+document.querySelectorAll('nav a').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelectorAll('nav a').forEach(x=>x.classList.toggle('on',x===a))});
+render();detail(web);
+</script>
+</body>
+</html>
